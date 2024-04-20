@@ -31,12 +31,12 @@ const greet = async () => {
         }); 
     
         // The whole response has been received. Print out the result. 
-        resp.on('end', () => {
+        resp.on('end', async () => {
             var body = JSON.parse(data)
             console.log(body); 
             console.log(body.length);
             if(body.length == 0){
-                greet();
+                await greet();
             }
             var random = Math.floor(Math.random() * (body.length));
             console.log(random);
@@ -54,9 +54,9 @@ const greet = async () => {
 
 };
 
-app.get("/tweet", (req, res) => {
+app.get("/tweet", async (req, res) => {
     try {
-        greet();
+        await greet();
     } catch (err) {
         console.log(err);
     }
