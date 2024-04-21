@@ -54,9 +54,9 @@ const greet = async () => {
 
 };
 
-app.get("/tweet", async (req, res) => {
+app.get("/tweet", (req, res) => {
     try {
-        await greet();
+        greet();
     } catch (err) {
         console.log(err);
     }
