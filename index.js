@@ -36,7 +36,7 @@ const greet = async () => {
             console.log(body); 
             console.log(body.length);
             if(body.length == 0){
-                await greet();
+                greet();
             }
             var random = Math.floor(Math.random() * (body.length));
             console.log(random);
