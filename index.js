@@ -72,7 +72,7 @@ app.get("/", (req, res) => {
     res.send('get');
 });
 
-router.get('/tweet', (req, res, next) => {
+app.get('/tweet', (req, res, next) => {
     (async () => {
         await greet();
         res.send("成功");
