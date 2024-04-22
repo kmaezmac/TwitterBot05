@@ -36,7 +36,7 @@ const greet = async () => {
             console.log(body); 
             console.log(body.length);
             if(body.length == 0){
-                await greet();
+                return false;
             }
             var random = Math.floor(Math.random() * (body.length));
             console.log(random);
@@ -74,9 +74,12 @@ app.get("/", (req, res) => {
 
 app.get('/tweet', (req, res, next) => {
     (async () => {
-        await greet();
-        res.send("成功");
-  
+        var result = false;
+        while(!result) {
+            result = await greet();
+        }
+        res.send("成功")
+
     })().catch(next);
   })
 
