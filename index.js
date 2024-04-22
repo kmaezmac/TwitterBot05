@@ -36,7 +36,7 @@ const greet = async () => {
             console.log(body); 
             console.log(body.length);
             if(body.length == 0){
-                greet();
+                await greet();
             }
             var random = Math.floor(Math.random() * (body.length));
             console.log(random);
@@ -54,14 +54,14 @@ const greet = async () => {
 
 };
 
-app.get("/tweet", (req, res) => {
-    try {
-        greet();
-    } catch (err) {
-        console.log(err);
-    }
-    res.send('get');
-});
+// app.get("/tweet", (req, res) => {
+//     try {
+//         greet();
+//     } catch (err) {
+//         console.log(err);
+//     }
+//     res.send('get');
+// });
 
 app.get("/", (req, res) => {
     try {
@@ -71,6 +71,14 @@ app.get("/", (req, res) => {
     }
     res.send('get');
 });
+
+router.get('/tweet', (req, res, next) => {
+    (async () => {
+        await greet();
+        res.send("成功");
+  
+    })().catch(next);
+  })
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT);
