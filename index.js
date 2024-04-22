@@ -74,10 +74,7 @@ app.get("/", (req, res) => {
 
 app.get('/tweet', (req, res, next) => {
     (async () => {
-        var result = false;
-        while(!result) {
-            result = await greet();
-        }
+        await greet();
         res.send("成功")
 
     })().catch(next);
