@@ -54,14 +54,83 @@ const greet = async () => {
 
 };
 
-// app.get("/tweet", (req, res) => {
-//     try {
-//         greet();
-//     } catch (err) {
-//         console.log(err);
-//     }
-//     res.send('get');
-// });
+app.get("/tiktok", (req, res) => {
+    try {
+        var text = "【期間限定】今なら誰でも" + process.env.TIKTOK_AMOUNT + "円ゲットできるよ\n招待URL: " + process.env.TIKTOK_URL + "\nルールを守らないとお金がもらえないので必ず↓を見て登録してね"
+        const emojis = [
+            "😀",
+            "😆",
+            "🤣",
+            "😉",
+            "🥰",
+            "😍",
+            "🤩",
+            "😘",
+            "😚",
+            "😋",
+            "😝",
+            "🤑",
+            "🫣",
+            "🤫",
+            "🤔",
+            "🫡",
+            "😏",
+            "🥳",
+            "😎",
+            "😲",
+            "😮",
+            "😳",
+            "🥺",
+            "🥹",
+            "😻",
+            "🙊",
+            "💖",
+            "❤️‍🔥",
+            "💯",
+            "🐶",
+            "🐺",
+            "🐱",
+            "🐭",
+            "🐹",
+            "🐰",
+            "🐸",
+            "🐯",
+            "🐨",
+            "🐻",
+            "🐷",
+            "🐽",
+            "🐮",
+            "🐗",
+            "🐵",
+            "🐒",
+            "🐴",
+            "🐑",
+            "🐘",
+            "🐼",
+            "🐧",
+            "🐦",
+            "🐤",
+            "🐥",
+            "🐣",
+            "🐔",
+        ]
+        var random = emojis[Math.floor(Math.random()* emojis.length)];
+        console.log(random)
+        var count = Math.floor(Math.random() * 10) + 1;
+        var randomEmojiText = "";
+        for(var i = 0; i < count; i++){
+            randomEmojiText += random;
+        }
+        var hashTag = "\n#TikTokLite #ポイ活";
+        var link = "\n" + process.env.HATENA_URL;
+        var tweet = text + randomEmojiText + hashTag + link;
+        console.log(tweet)
+        client.v2.tweet(tweet); 
+    } catch (err) {
+        console.log(err);
+    }
+    res.send('get');
+});
 
 app.get("/", (req, res) => {
     try {
